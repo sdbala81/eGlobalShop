@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <RootNamespace>ElementLogiq.eGlobalShop.Orders.WebApi</RootNamespace>
+        <AssemblyName>ElementLogiq.eGlobalShop.Orders.WebApi</AssemblyName>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="AspNetCore.HealthChecks.UI.Client"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\Shared\WebApi.Helpers\WebApi.Helpers.csproj"/>
+        <ProjectReference Include="..\Infrastructure\Infrastructure.csproj"/>
+    </ItemGroup>
+
+</Project>

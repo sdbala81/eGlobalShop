@@ -1,0 +1,7 @@
+# Ignore all files in the Migration folder
+[*.cs]
+
+[Migrations/*.cs]
+dotnet_diagnostic.IDE0161.severity = none
+dotnet_diagnostic.IDE0005.severity = none
+dotnet_diagnostic.IDE0055.severity = none

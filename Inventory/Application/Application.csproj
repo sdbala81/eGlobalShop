@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <RootNamespace>ElementLogiq.eGlobalShop.Inventory.Application</RootNamespace>
+        <AssemblyName>ElementLogiq.eGlobalShop.Inventory.Application</AssemblyName>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="FluentValidation.DependencyInjectionExtensions"/>
+        <PackageReference Include="MediatR"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\Shared\Application.Helpers\Application.Helpers.csproj"/>
+        <ProjectReference Include="..\..\Shared\Nats.Helpers\Nats.Helpers.csproj"/>
+        <ProjectReference Include="..\Domain\Domain.csproj"/>
+    </ItemGroup>
+</Project>

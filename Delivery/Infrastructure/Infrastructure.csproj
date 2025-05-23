@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <RootNamespace>ElementLogiq.eGlobalShop.Customers.Infrastructure</RootNamespace>
+        <AssemblyName>ElementLogiq.eGlobalShop.Customers.Infrastructure</AssemblyName>
+    </PropertyGroup>
+
+
+    <ItemGroup>
+        <PackageReference Include="AspNetCore.HealthChecks.NpgSql"/>
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL"/>
+        <PackageReference Include="EFCore.NamingConventions"/>
+
+    </ItemGroup>
+
+
+    <ItemGroup>
+        <ProjectReference Include="..\Application\Application.csproj"/>
+        <ProjectReference Include="..\Domain\Domain.csproj"/>
+    </ItemGroup>
+
+
+    <ItemGroup>
+        <EditorConfigFiles Remove=".editorconfig"/>
+    </ItemGroup>
+
+
+    <ItemGroup>
+        <Content Update="Database\Seed\customers.json">
+            <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        </Content>
+    </ItemGroup>
+
+
+</Project>

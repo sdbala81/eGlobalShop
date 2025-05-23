@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <RootNamespace>ElementLogiq.eGlobalShop.Customers.WebApi</RootNamespace>
+        <AssemblyName>ElementLogiq.eGlobalShop.Customers.WebApi</AssemblyName>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="AspNetCore.HealthChecks.UI.Client"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\Shared\WebApi.Helpers\WebApi.Helpers.csproj"/>
+        <ProjectReference Include="..\Infrastructure\Infrastructure.csproj"/>
+    </ItemGroup>
+
+    <Target Name="CustomCopyFiles" AfterTargets="Build">
+        <!-- Define source and destination -->
+        <ItemGroup>
+            <DatabaseSeedFiles Include="..\Infrastructure\Database\Seed\*.*"/>
+        </ItemGroup>
+        <Copy SourceFiles="@(DatabaseSeedFiles)" DestinationFolder="$(OutputPath)"/>
+    </Target>
+
+</Project>
