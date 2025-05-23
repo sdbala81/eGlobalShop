@@ -4,21 +4,13 @@ public class GetPaymentResponse
 {
     public Guid Id { get; set; }
 
-    public string FirstName { get; set; }
 
-    public string LastName { get; set; }
-
-    public string Email { get; set; }
-
-    public string PhoneNumber { get; set; }
-
-    public DateOnly DateOfBirth { get; set; }
-
-    public string Address { get; set; }
-
-    public string City { get; set; }
-
-    public string State { get; set; }
-
-    public string ZipCode { get; set; }
+    // Payment entity properties
+    public Guid CustomerId { get; set; }
+    public Guid OrderId { get; set; }
+    public decimal Amount { get; set; }
+    public string PaymentType { get; set; } // Changed from string to PaymentType
+    public string Status { get; set; } // Changed from string to PaymentStatus
+    public DateTime PaymentDateTime { get; set; }
+    public string BillingAddress { get; set; } // Changed from string to BillingAddress
 }

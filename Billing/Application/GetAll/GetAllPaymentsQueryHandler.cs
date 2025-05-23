@@ -13,20 +13,19 @@ public class GetAllPaymentsQueryHandler(IPaymentDbContext paymentDbContext)
     public async Task<Result<IReadOnlyList<GetPaymentResponse>>> Handle(GetAllPaymentsQuery request, CancellationToken cancellationToken)
     {
         var payments = await paymentDbContext
-            .Invoice
-            .Select(c => new GetPaymentResponse
-            {
-                Id = c.Id,
-                FirstName = c.FirstName,
-                LastName = c.LastName,
-                Email = c.Email,
-                PhoneNumber = c.PhoneNumber,
-                DateOfBirth = c.DateOfBirth,
-                Address = c.Address,
-                City = c.City,
-                State = c.State,
-                ZipCode = c.ZipCode
-            })
+            .Payment
+            .Select(
+                c => new GetPaymentResponse
+                {
+                    Id = c.Id,
+                    CustomerId = c.CustomerId,
+                    OrderId = c.OrderId,
+                    Amount = c.Amount,
+                    PaymentType = c.PaymentType.ToString(),
+                    Status = c.PaymentStatus.ToString(),
+                    PaymentDateTime = c.PaymentDateTime,
+                    BillingAddress = c.BillingAddress.ToString()
+                })
             .ToListAsync(cancellationToken)
             .ConfigureAwait(false);
 

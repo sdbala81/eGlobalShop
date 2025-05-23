@@ -13,7 +13,7 @@ public sealed class MakePayment : IEndpoint
     {
         app.MapPost(
                 "/payments",
-                async (CreatePaymentCommand createPaymentCommand, ISender sender, CancellationToken cancellationToken) =>
+                async (MakePaymentCommand createPaymentCommand, ISender sender, CancellationToken cancellationToken) =>
                 {
                     var result = await sender.Send(createPaymentCommand, cancellationToken)
                         .ConfigureAwait(false);

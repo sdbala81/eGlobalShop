@@ -1,4 +1,4 @@
-﻿using ElementLogiq.eGlobalShop.Billing.Domain;
+﻿using ElementLogiq.eGlobalShop.Billing.Domain.Entities;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -6,7 +6,8 @@ namespace ElementLogiq.eGlobalShop.Billing.Application.Data;
 
 public interface IPaymentDbContext
 {
-    DbSet<Invoice> Invoice { get; }
+    DbSet<Payment> Payment { get; }
+
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

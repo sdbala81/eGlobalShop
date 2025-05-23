@@ -1,5 +1,5 @@
 ﻿using ElementLogiq.eGlobalShop.Billing.Application.Data;
-using ElementLogiq.eGlobalShop.Billing.Domain;
+using ElementLogiq.eGlobalShop.Billing.Domain.Entities;
 using ElementLogiq.SharedKernel;
 
 using MediatR;
@@ -11,7 +11,7 @@ namespace ElementLogiq.eGlobalShop.Billing.Infrastructure.Database;
 public sealed class PaymentDbContext(DbContextOptions<PaymentDbContext> options, IPublisher publisher) : DbContext(options),
     IPaymentDbContext
 {
-    public DbSet<Invoice> Invoice { get; set; }
+    public DbSet<Payment> Payment { get; set; }
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {

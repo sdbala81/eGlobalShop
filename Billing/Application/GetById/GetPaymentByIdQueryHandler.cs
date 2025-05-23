@@ -11,19 +11,17 @@ public class GetCustomerByIdQueryHandler(IPaymentDbContext paymentDbContext) : I
 {
     public async Task<Result<GetPaymentResponse>> Handle(GetPaymentByIdQuery query, CancellationToken cancellationToken)
     {
-        var payment = await paymentDbContext.Invoice.Where(c => c.Id == query.PaymentId)
+        var payment = await paymentDbContext.Payment.Where(c => c.Id == query.PaymentId)
             .Select(c => new GetPaymentResponse
             {
                 Id = c.Id,
-                FirstName = c.FirstName,
-                LastName = c.LastName,
-                Email = c.Email,
-                PhoneNumber = c.PhoneNumber,
-                DateOfBirth = c.DateOfBirth,
-                Address = c.Address,
-                City = c.City,
-                State = c.State,
-                ZipCode = c.ZipCode
+                CustomerId = c.CustomerId,
+                OrderId = c.OrderId,
+                Amount = c.Amount,
+                PaymentType = c.PaymentType.ToString(),
+                Status = c.PaymentStatus.ToString(),
+                PaymentDateTime = c.PaymentDateTime,
+                BillingAddress = c.BillingAddress.ToString()
             })
             .SingleOrDefaultAsync(cancellationToken)
             .ConfigureAwait(false);
