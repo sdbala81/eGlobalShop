@@ -1,0 +1,16 @@
+### Make a payment
+POST http://localhost:10000/shipments
+Content-Type: application/json
+
+{
+  "orderId": "{{$uuid}}",
+  "paymentType": "CreditCard",
+  "orderAmount": 100.00,
+  "customerId": "{{$uuid}}",
+  "houseNo": "123",
+  "street": "Main Street",
+  "city": "Sample City",
+  "state": "Sample State",
+  "postalCode": "12345",
+  "country": "Sample Country"
+}
