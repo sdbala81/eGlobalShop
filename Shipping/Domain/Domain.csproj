@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<RootNamespace>ElementLogiq.eGlobalShop.Shipping.Domain</RootNamespace>
+		<AssemblyName>ElementLogiq.eGlobalShop.Shipping.Domain</AssemblyName>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Shared\SharedKernel\SharedKernel.csproj" />
+	</ItemGroup>
+</Project>

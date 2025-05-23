@@ -1,4 +1,4 @@
-using ElementLogiq.eGlobalShop.Billing.Application.Create;
+using ElementLogiq.eGlobalShop.Billing.Application.Pay;
 using ElementLogiq.eGlobalShop.WebApi.Helpers;
 using ElementLogiq.eGlobalShop.WebApi.Helpers.Extensions;
 using ElementLogiq.eGlobalShop.WebApi.Helpers.Infrastructure;

@@ -7,7 +7,7 @@
         "NATS_SERVER_URL": "nats://localhost:4222"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "http://localhost:9000"
+      "applicationUrl": "http://localhost:10000"
     },
     "https": {
       "commandName": "Project",
@@ -16,15 +16,15 @@
         "NATS_SERVER_URL": "nats://localhost:4222"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "https://localhost:9001;http://localhost:9000"
+      "applicationUrl": "https://localhost:10001;http://localhost:10000"
     },
     "Container (Dockerfile)": {
       "commandName": "Docker",
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_HTTPS_PORTS": "9001",
-        "ASPNETCORE_HTTP_PORTS": "9000",
+        "ASPNETCORE_HTTPS_PORTS": "10001",
+        "ASPNETCORE_HTTP_PORTS": "10000",
         "NATS_SERVER_URL": "nats://localhost:4222"
       },
       "publishAllPorts": true,
