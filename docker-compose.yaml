@@ -71,10 +71,23 @@ services:
     depends_on:
       - postgres-db
       - nats-server
-
   nats-server:
     image: nats:latest
     container_name: nats
     ports:
       - "4222:4222"
       - "8222:8222" # HTTP monitoring port
+
+  seq:
+    image: datalust/seq:latest
+    container_name: seq
+    environment:
+      ACCEPT_EULA: Y
+    ports:
+      - "5342:80"
+    volumes:
+      - seq-data:/data
+    restart: unless-stopped
+
+volumes:
+  seq-data:
