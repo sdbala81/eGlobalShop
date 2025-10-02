@@ -1,0 +1,12 @@
+# eGlobalShop Base Compose Configuration
+# This file defines the shared network and volumes for the eGlobalShop microservices
+
+name: eglobalshop
+
+networks:
+  eglobalshop-network:
+    driver: bridge
+
+volumes:
+  seq-data:
+    driver: local

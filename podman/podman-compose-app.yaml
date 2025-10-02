@@ -1,0 +1,99 @@
+services:
+  customers-service:
+    image: eglobalshop-customers-service
+    container_name: customers-service
+    build:
+      context: ../services
+      dockerfile: Customers/Dockerfile
+    ports:
+      - "7000:7000"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: 7000
+      ConnectionStrings__Database: "Host=postgres-db;Port=5432;Database=eGlobalShop.Customers;Username=postgres;Password=postgres;Include Error Detail=true"
+      NATS_SERVER_URL: nats://nats:4222
+    depends_on:
+      - postgres-db
+      - nats-server
+    networks:
+      - eglobalshop-network
+
+  order-service:
+    image: eglobalshop-order-service
+    container_name: order-service
+    build:
+      context: ../services
+      dockerfile: Orders/Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: 5000
+      ConnectionStrings__Database: "Host=postgres-db;Port=5432;Database=eGlobalShop.Orders;Username=postgres;Password=postgres;Include Error Detail=true"
+      NATS_SERVER_URL: nats://nats:4222
+    depends_on:
+      - postgres-db
+      - nats-server
+    networks:
+      - eglobalshop-network
+
+  inventory-service:
+    image: eglobalshop-inventory-service
+    container_name: inventory-service
+    build:
+      context: ../services
+      dockerfile: Inventory/Dockerfile
+    ports:
+      - "6000:6000"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: 6000
+      ConnectionStrings__Database: "Host=postgres-db;Port=5432;Database=eGlobalShop.Inventory;Username=postgres;Password=postgres;Include Error Detail=true"
+      NATS_SERVER_URL: nats://nats:4222
+    depends_on:
+      - postgres-db
+      - nats-server
+    networks:
+      - eglobalshop-network
+
+  billing-service:
+    image: eglobalshop-billing-service
+    container_name: billing-service
+    build:
+      context: ../services
+      dockerfile: Billing/Dockerfile
+    ports:
+      - "9000:9000"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: 9000
+      ConnectionStrings__Database: "Host=postgres-db;Port=5432;Database=eGlobalShop.Billing;Username=postgres;Password=postgres;Include Error Detail=true"
+      NATS_SERVER_URL: nats://nats:4222
+    depends_on:
+      - postgres-db
+      - nats-server
+    networks:
+      - eglobalshop-network
+
+  shipping-service:
+    image: eglobalshop-shipping-service
+    container_name: shipping-service
+    build:
+      context: ../services
+      dockerfile: Shipping/Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: 8000
+      ConnectionStrings__Database: "Host=postgres-db;Port=5432;Database=eGlobalShop.Shipping;Username=postgres;Password=postgres;Include Error Detail=true"
+      NATS_SERVER_URL: nats://nats:4222
+    depends_on:
+      - postgres-db
+      - nats-server
+    networks:
+      - eglobalshop-network
+
+networks:
+  eglobalshop-network:
+    external: true

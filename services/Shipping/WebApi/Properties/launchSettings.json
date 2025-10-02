@@ -4,8 +4,7 @@
       "commandName": "Project",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "NATS_SERVER_URL": "nats://localhost:4222",
-        "NATS_SUBJECT": "Customers"
+        "NATS_SERVER_URL": "nats://localhost:4222"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "http://localhost:8000"
@@ -14,8 +13,7 @@
       "commandName": "Project",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "NATS_SERVER_URL": "nats://localhost:4222",
-        "NATS_SUBJECT": "Customers"
+        "NATS_SERVER_URL": "nats://localhost:4222"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "https://localhost:8001;http://localhost:8000"
@@ -27,8 +25,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development",
         "ASPNETCORE_HTTPS_PORTS": "8001",
         "ASPNETCORE_HTTP_PORTS": "8000",
-        "NATS_SERVER_URL": "nats://localhost:4222",
-        "NATS_SUBJECT": "Customers"
+        "NATS_SERVER_URL": "nats://localhost:4222"
       },
       "publishAllPorts": true,
       "useSSL": false

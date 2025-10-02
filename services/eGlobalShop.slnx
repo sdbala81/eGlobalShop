@@ -1,0 +1,48 @@
+﻿<Solution>
+  <Folder Name="/Billing/">
+    <Project Path="Billing\Application\Application.csproj" Type="Classic C#" />
+    <Project Path="Billing\Domain\Domain.csproj" Type="Classic C#" />
+    <Project Path="Billing\Infrastructure\Infrastructure.csproj" Type="Classic C#" />
+    <Project Path="Billing\WebApi\WebApi.csproj" Type="Classic C#" />
+    <File Path="Billing\Dockerfile" />
+  </Folder>
+  <Folder Name="/Customers/">
+    <Project Path="Customers\Application\Application.csproj" Type="Classic C#" />
+    <Project Path="Customers\Domain\Domain.csproj" Type="Classic C#" />
+    <Project Path="Customers\Infrastructure\Infrastructure.csproj" Type="Classic C#" />
+    <Project Path="Customers\WebApi\WebApi.csproj" Type="Classic C#" />
+    <File Path="Customers\Dockerfile" />
+  </Folder>
+  <Folder Name="/Inventory/">
+    <Project Path="Inventory\Application\Application.csproj" Type="Classic C#" />
+    <Project Path="Inventory\Domain\Domain.csproj" Type="Classic C#" />
+    <Project Path="Inventory\Infrastructure\Infrastructure.csproj" Type="Classic C#" />
+    <Project Path="Inventory\WebApi\WebApi.csproj" Type="Classic C#" />
+    <File Path="Inventory\Dockerfile" />
+  </Folder>
+  <Folder Name="/Orders/">
+    <Project Path="Orders\Application\Application.csproj" Type="Classic C#" />
+    <Project Path="Orders\Domain\Domain.csproj" Type="Classic C#" />
+    <Project Path="Orders\Infrastructure\Infrastructure.csproj" Type="Classic C#" />
+    <Project Path="Orders\WebApi\WebApi.csproj" Type="Classic C#" />
+    <File Path="Orders\Dockerfile" />
+  </Folder>
+  <Folder Name="/Shared/">
+    <Project Path="Shared\Application.Helpers\Application.Helpers.csproj" Type="Classic C#" />
+    <Project Path="Shared\Nats.Helpers\Nats.Helpers.csproj" Type="Classic C#" />
+    <Project Path="Shared\SharedKernel\SharedKernel.csproj" Type="Classic C#" />
+    <Project Path="Shared\WebApi.Helpers\WebApi.Helpers.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/Shipping/">
+    <Project Path="Shipping\Application\Application.csproj" Type="Classic C#" />
+    <Project Path="Shipping\Domain\Domain.csproj" Type="Classic C#" />
+    <Project Path="Shipping\Infrastructure\Infrastructure.csproj" Type="Classic C#" />
+    <Project Path="Shipping\WebApi\WebApi.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="README.md" />
+  </Folder>
+</Solution>

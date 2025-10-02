@@ -1,5 +1,5 @@
 ### 1. Create an order
-POST http://localhost:7000/orders
+POST http://localhost:5000/orders
 Content-Type: application/json
 
 {

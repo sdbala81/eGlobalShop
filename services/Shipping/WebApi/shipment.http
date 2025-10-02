@@ -1,5 +1,5 @@
 ### Make a payment
-POST http://localhost:10000/shipments
+POST http://localhost:8000/shipments
 Content-Type: application/json
 
 {
