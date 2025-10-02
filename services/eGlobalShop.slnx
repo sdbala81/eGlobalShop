@@ -38,6 +38,7 @@
     <Project Path="Shipping\Domain\Domain.csproj" Type="Classic C#" />
     <Project Path="Shipping\Infrastructure\Infrastructure.csproj" Type="Classic C#" />
     <Project Path="Shipping\WebApi\WebApi.csproj" Type="Classic C#" />
+    <File Path="Shipping\Dockerfile" />
   </Folder>
   <Folder Name="/Solution Items/">
     <File Path=".editorconfig" />

@@ -12,19 +12,19 @@ WORKDIR src
 COPY ["Directory.Packages.props", "."]
 COPY ["Directory.Build.props", "."]
 
-COPY ["Billing/WebApi/WebApi.csproj", "src/Billing/WebApi/"]
-COPY ["Billing/Infrastructure/Infrastructure.csproj", "src/Billing/Infrastructure/"]
-COPY ["Billing/Domain/Domain.csproj", "src/Billing/Domain/"]
-COPY ["Billing/Application/Application.csproj", "src/Billing/Application/"]
+COPY ["Shipping/WebApi/WebApi.csproj", "src/Shipping/WebApi/"]
+COPY ["Shipping/Infrastructure/Infrastructure.csproj", "src/Shipping/Infrastructure/"]
+COPY ["Shipping/Domain/Domain.csproj", "src/Shipping/Domain/"]
+COPY ["Shipping/Application/Application.csproj", "src/Shipping/Application/"]
 
 COPY ["Shared/SharedKernel/SharedKernel.csproj", "src/Shared/SharedKernel/"]
 COPY ["Shared/WebApi.Helpers/WebApi.Helpers.csproj", "src/Shared/WebApi.Helpers/"]
 COPY ["Shared/Application.Helpers/Application.Helpers.csproj", "src/Shared/Application.Helpers/"]
 COPY ["Shared/Nats.Helpers/Nats.Helpers.csproj", "src/Shared/Nats.Helpers/"]
 
-RUN dotnet restore "./src/Billing/WebApi/WebApi.csproj"
+RUN dotnet restore "./src/Shipping/WebApi/WebApi.csproj"
 COPY . .
-WORKDIR "/src/Billing/WebApi/"
+WORKDIR "/src/Shipping/WebApi/"
 RUN dotnet build "./WebApi.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage

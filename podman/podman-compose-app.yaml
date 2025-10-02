@@ -93,7 +93,3 @@ services:
       - nats-server
     networks:
       - eglobalshop-network
-
-networks:
-  eglobalshop-network:
-    external: true
