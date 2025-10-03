@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pgadmin-config
+  namespace: eglobalshop
+  labels:
+    app: pgadmin
+    app.kubernetes.io/name: pgadmin
+    app.kubernetes.io/component: database-admin
+    app.kubernetes.io/part-of: eglobalshop-microservices
+data:
+  PGADMIN_DEFAULT_EMAIL: admin@eGlobalShop.com
+  PGADMIN_DEFAULT_PASSWORD: postgres

@@ -1,0 +1,213 @@
+# eGlobalShop Kubernetes Deployment
+
+This directory contains Kubernetes manifests for deploying the eGlobalShop microservices architecture.
+
+## Architecture Overview
+
+The eGlobalShop system consists of:
+
+### Infrastructure Services
+- **PostgreSQL**: Main database (port 5432)
+- **PgAdmin**: Database administration tool (NodePort 30050)
+- **NATS**: Message broker (port 4222, monitoring on NodePort 30822)
+- **Seq**: Centralized logging (NodePort 30341)
+
+### Application Services
+- **Orders Service**: Order management (NodePort 30500)
+- **Customers Service**: Customer management (NodePort 30700)
+- **Inventory Service**: Product inventory (NodePort 30600)
+- **Billing Service**: Payment processing (NodePort 30900)
+- **Shipping Service**: Shipment tracking (NodePort 30800)
+
+## Directory Structure
+
+```
+k8s/
+├── namespace.yaml              # eGlobalShop namespace
+├── deploy.sh                   # Deployment script
+├── postgres/                   # PostgreSQL database
+│   ├── configmap.yaml
+│   ├── deployment.yaml
+│   ├── service.yaml
+│   └── pvc.yaml
+├── pgadmin/                    # Database admin interface
+│   ├── configmap.yaml
+│   ├── deployment.yaml
+│   └── service.yaml
+├── nats/                       # Message broker
+│   ├── deployment.yaml
+│   └── service.yaml
+├── seq/                        # Logging service
+│   ├── configmap.yaml
+│   ├── deployment.yaml
+│   ├── service.yaml
+│   └── pvc.yaml
+├── customers/                  # Customers microservice
+│   ├── configmap.yaml
+│   ├── deployment.yaml
+│   └── service.yaml
+├── orders/                     # Orders microservice
+│   ├── configmap.yaml
+│   ├── deployment.yaml
+│   └── service.yaml
+├── inventory/                  # Inventory microservice
+│   ├── configmap.yaml
+│   ├── deployment.yaml
+│   └── service.yaml
+├── billing/                    # Billing microservice
+│   ├── configmap.yaml
+│   ├── deployment.yaml
+│   └── service.yaml
+└── shipping/                   # Shipping microservice
+    ├── configmap.yaml
+    ├── deployment.yaml
+    └── service.yaml
+```
+
+## Prerequisites
+
+1. **Kubernetes Cluster**: Ensure you have a running Kubernetes cluster
+2. **kubectl**: Configured to connect to your cluster
+3. **Container Images**: Build and push the microservice images to your registry
+
+## Building Container Images
+
+Before deploying, build the container images using the Podman/Docker setup:
+
+```bash
+# Navigate to the podman directory
+cd ../podman
+
+# Build all images
+./start.sh
+
+# Or build individual services as needed
+```
+
+**Note**: Update the image references in the deployment.yaml files if using a different registry.
+
+## Deployment
+
+### Deploy All Services
+
+```bash
+./deploy.sh
+```
+
+### Deploy Infrastructure Only
+
+```bash
+./deploy.sh infra
+```
+
+### Deploy Application Services Only
+
+```bash
+./deploy.sh app
+```
+
+## Service Access
+
+### Internal Communication
+Services communicate using their Kubernetes service names:
+- `postgres-db:5432`
+- `nats-server:4222`
+- `customers-service:7000`
+- `orders-service:5000`
+- `inventory-service:6000`
+- `billing-service:9000`
+- `shipping-service:8000`
+
+### External Access (NodePort)
+- **Orders Service**: `http://<node-ip>:30500`
+- **Customers Service**: `http://<node-ip>:30700`
+- **Inventory Service**: `http://<node-ip>:30600`
+- **Billing Service**: `http://<node-ip>:30900`
+- **Shipping Service**: `http://<node-ip>:30800`
+- **PgAdmin**: `http://<node-ip>:30050`
+- **NATS Monitor**: `http://<node-ip>:30822`
+- **Seq**: `http://<node-ip>:30341`
+
+## Monitoring and Troubleshooting
+
+### Check Pod Status
+```bash
+kubectl get pods -n eglobalshop
+```
+
+### View Logs
+```bash
+# View logs for a specific service
+kubectl logs deployment/orders-service -n eglobalshop
+
+# Follow logs in real-time
+kubectl logs -f deployment/customers-service -n eglobalshop
+```
+
+### Check Service Endpoints
+```bash
+kubectl get services -n eglobalshop
+```
+
+### Describe Resources
+```bash
+# Check deployment status
+kubectl describe deployment orders-service -n eglobalshop
+
+# Check pod details
+kubectl describe pod <pod-name> -n eglobalshop
+```
+
+## Configuration
+
+Each microservice uses a ConfigMap for environment variables:
+- Database connection strings point to `postgres-db` service
+- NATS URL points to `nats-server` service
+- All services run in Development mode with appropriate logging
+
+## Resource Requirements
+
+Each microservice is configured with:
+- **Requests**: 128Mi memory, 100m CPU
+- **Limits**: 256Mi memory, 200m CPU
+
+Infrastructure services have appropriate resource allocations based on their requirements.
+
+## Persistent Storage
+
+- **PostgreSQL**: 5Gi persistent volume for database storage
+- **Seq**: 2Gi persistent volume for log data
+
+## Health Checks
+
+All services include:
+- **Liveness Probes**: Check if the service is running
+- **Readiness Probes**: Check if the service is ready to receive traffic
+
+**Note**: The health check endpoints (`/health` and `/ready`) need to be implemented in the microservices.
+
+## Cleanup
+
+To remove all eGlobalShop resources:
+
+```bash
+kubectl delete namespace eglobalshop
+```
+
+## Security Considerations
+
+1. **Database Credentials**: Currently using hardcoded credentials for development
+2. **Network Policies**: Consider implementing network policies for production
+3. **RBAC**: Implement proper role-based access control
+4. **Secrets**: Move sensitive configuration to Kubernetes Secrets
+
+## Production Readiness
+
+For production deployment, consider:
+1. Using Kubernetes Secrets for sensitive data
+2. Implementing proper resource quotas and limits
+3. Setting up horizontal pod autoscaling
+4. Configuring ingress controllers for external access
+5. Implementing network policies
+6. Setting up monitoring and alerting
+7. Configuring backup strategies for persistent volumes

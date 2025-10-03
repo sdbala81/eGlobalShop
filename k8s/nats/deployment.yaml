@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nats-server
+  namespace: eglobalshop
+  labels:
+    app: nats-server
+    app.kubernetes.io/name: nats
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/component: messaging
+    app.kubernetes.io/part-of: eglobalshop-microservices
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nats-server
+  template:
+    metadata:
+      labels:
+        app: nats-server
+        app.kubernetes.io/name: nats
+        app.kubernetes.io/component: messaging
+    spec:
+      containers:
+        - name: nats
+          image: docker.io/library/nats:latest
+          ports:
+            - containerPort: 4222
+              name: nats
+            - containerPort: 8222
+              name: monitoring
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "128Mi"
+              cpu: "100m"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8222
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8222
+            initialDelaySeconds: 15
+            periodSeconds: 5

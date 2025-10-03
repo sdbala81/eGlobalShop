@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: billing-config
+  namespace: eglobalshop
+  labels:
+    app: billing-service
+    app.kubernetes.io/name: billing
+    app.kubernetes.io/component: microservice
+    app.kubernetes.io/part-of: eglobalshop-microservices
+data:
+  ASPNETCORE_ENVIRONMENT: Development
+  ASPNETCORE_HTTP_PORTS: "9000"
+  ConnectionStrings__Database: "Host=postgres-db;Port=5432;Database=eGlobalShop.Billing;Username=postgres;Password=postgres;Include Error Detail=true"
+  NATS_SERVER_URL: "nats://nats-server:4222"

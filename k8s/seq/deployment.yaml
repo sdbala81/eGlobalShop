@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: seq
+  namespace: eglobalshop
+  labels:
+    app: seq
+    app.kubernetes.io/name: seq
+    app.kubernetes.io/version: "latest"
+    app.kubernetes.io/component: logging
+    app.kubernetes.io/part-of: eglobalshop-microservices
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: seq
+  template:
+    metadata:
+      labels:
+        app: seq
+        app.kubernetes.io/name: seq
+        app.kubernetes.io/component: logging
+    spec:
+      containers:
+        - name: seq
+          image: docker.io/datalust/seq:latest
+          ports:
+            - containerPort: 80
+              name: http
+          envFrom:
+            - configMapRef:
+                name: seq-config
+          volumeMounts:
+            - name: seq-data
+              mountPath: /data
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "200m"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 15
+            periodSeconds: 5
+      volumes:
+        - name: seq-data
+          persistentVolumeClaim:
+            claimName: seq-data-pvc
+      restartPolicy: Always

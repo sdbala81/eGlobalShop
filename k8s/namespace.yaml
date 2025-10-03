@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: eglobalshop
+  labels:
+    name: eglobalshop
+    app.kubernetes.io/name: eglobalshop
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/component: namespace
+    app.kubernetes.io/part-of: eglobalshop-microservices

@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: seq
+  namespace: eglobalshop
+  labels:
+    app: seq
+    app.kubernetes.io/name: seq
+    app.kubernetes.io/component: logging
+    app.kubernetes.io/part-of: eglobalshop-microservices
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 5341
+      protocol: TCP
+      name: http
+  selector:
+    app: seq
