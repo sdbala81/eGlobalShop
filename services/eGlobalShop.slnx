@@ -45,5 +45,6 @@
     <File Path="Directory.Build.props" />
     <File Path="Directory.Packages.props" />
     <File Path="README.md" />
+    <File Path="..\eGlobalShop.http" />
   </Folder>
 </Solution>

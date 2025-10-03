@@ -2,7 +2,7 @@
 
 # eGlobalShop Podman Deployment Script
 # This script builds and starts all microservices using podman-compose
-# Usage: ./deploy.sh [profile]
+# Usage: ./start.sh [profile]
 #   profile: optional parameter (infra, app, or omit for all services)
 
 set -e
@@ -19,19 +19,26 @@ fi
 # Navigate to the directory containing this script
 cd "$(dirname "$0")"
 
-# Build and start services based on profile
+# Build services first
+echo "🔨 Building services..."
+./build.sh "$PROFILE"
+
+echo ""
+echo "🚀 Starting services..."
+
+# Start services based on profile
 if [ "$PROFILE" = "infra" ]; then
-    echo "🔨 Building and starting infrastructure services..."
-    podman-compose -f compose.yaml -f podman-compose-infra.yaml up --build -d
+    echo "� Starting infrastructure services..."
+    podman-compose -f compose.yaml -f podman-compose-infra.yaml up -d
 elif [ "$PROFILE" = "app" ]; then
-    echo "🔨 Building and starting application services..."
-    podman-compose -f compose.yaml -f podman-compose-app.yaml up --build -d
+    echo "� Starting application services..."
+    podman-compose -f compose.yaml -f podman-compose-app.yaml up -d
 else
-    echo "🔨 Building and starting all services..."
+    echo "� Starting all services..."
     echo "Starting infrastructure services first..."
-    podman-compose -f compose.yaml -f podman-compose-infra.yaml up --build -d
+    podman-compose -f compose.yaml -f podman-compose-infra.yaml up -d
     echo "Starting application services..."
-    podman-compose -f compose.yaml -f podman-compose-app.yaml up --build -d
+    podman-compose -f compose.yaml -f podman-compose-app.yaml up -d
 fi
 
 echo ""
@@ -91,6 +98,8 @@ echo "🛑 To stop all services, run:"
 echo "   ./cleanup.sh"
 echo ""
 echo "📋 Usage examples:"
-echo "   ./deploy.sh                    # Deploy all services"
-echo "   ./deploy.sh infra              # Deploy only infrastructure services"
-echo "   ./deploy.sh app                # Deploy only application services"
+echo "   ./start.sh                     # Deploy all services"
+echo "   ./start.sh infra               # Deploy only infrastructure services"
+echo "   ./start.sh app                 # Deploy only application services"
+echo "   ./build.sh                     # Build all services only"
+echo "   ./build.sh infra               # Build only infrastructure services"

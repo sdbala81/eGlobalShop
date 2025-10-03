@@ -1,0 +1,234 @@
+# eGlobalShop API Collection
+# Comprehensive HTTP requests for all eGlobalShop microservices
+
+@ordersBaseUrl = http://localhost:5000
+@customersBaseUrl = http://localhost:7000
+@inventoryBaseUrl = http://localhost:6000
+@shippingBaseUrl = http://localhost:8000
+@billingBaseUrl = http://localhost:9000
+
+###############################################################################
+# ORDERS SERVICE (Port 5000)
+###############################################################################
+
+### Orders - Create an order
+POST {{ordersBaseUrl}}/orders
+Content-Type: application/json
+
+{
+  "customerId": "{{$uuid}}",
+  "orderDate": "2023-10-01",
+  "shippingAddress": "{{$random.address.fullAddress}}",
+  "billingAddress": "{{$random.address.fullAddress}}",
+  "paymentMethod": "CreditCard",
+  "discountCode": "DISCOUNT2023",
+  "orderItems": [
+    {
+      "productId": "a0b1c2d3-e4f5-4a6b-7c8d-9e0f1a2b3c4d",
+      "quantity": 5
+    },
+    {
+      "productId": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
+      "quantity": 10
+    }
+  ]
+}
+
+### Orders - Health Check
+GET {{ordersBaseUrl}}/health
+Accept: application/json
+
+### Orders - Readiness Probe
+GET {{ordersBaseUrl}}/ready
+Accept: application/json
+
+###############################################################################
+# CUSTOMERS SERVICE (Port 7000)
+###############################################################################
+
+### Customers - Get all Customers
+GET {{customersBaseUrl}}/customers
+Accept: application/json
+
+### Customers - Get Customer by Id
+GET {{customersBaseUrl}}/customers/94b84094-2f06-4b8c-b483-944698f1bd58
+Accept: application/json
+
+### Customers - Create a new Customer
+POST {{customersBaseUrl}}/customers
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "sdbala@example.com",
+  "phoneNumber": "123-456-7890",
+  "dateOfBirth": "1990-01-01",
+  "address": "123 Main Street",
+  "city": "Sample City",
+  "state": "Sample State",
+  "zipCode": "12345"
+}
+
+### Customers - Health Check
+GET {{customersBaseUrl}}/health
+Accept: application/json
+
+### Customers - Readiness Probe
+GET {{customersBaseUrl}}/ready
+Accept: application/json
+
+###############################################################################
+# INVENTORY SERVICE (Port 6000)
+###############################################################################
+
+### Inventory - Create a Category
+POST {{inventoryBaseUrl}}/categories
+Content-Type: application/json
+
+{
+  "name": "Electronics",
+  "description": "Electronics category."
+}
+
+### Inventory - Create a Product
+POST {{inventoryBaseUrl}}/products
+Content-Type: application/json
+
+{
+  "name": "SONY TV",
+  "description": "SONY Smart TV",
+  "price": 19.99,
+  "quantity": 5000,
+  "categoryId": 1
+}
+
+### Inventory - Update a Product
+PUT {{inventoryBaseUrl}}/products
+Content-Type: application/json
+
+{
+  "productId": "0196f6ab-1254-7c3f-8732-3c4c723efd22",
+  "quantity": 5
+}
+
+### Inventory - Get a Product by ID
+GET {{inventoryBaseUrl}}/products/a9b0c1d2-e3f4-4a5b-6c7d-8e9f0a1b2c3d
+Accept: application/json
+
+### Inventory - Get All Products
+GET {{inventoryBaseUrl}}/products
+Accept: application/json
+
+### Inventory - Health Check
+GET {{inventoryBaseUrl}}/health
+Accept: application/json
+
+### Inventory - Readiness Probe
+GET {{inventoryBaseUrl}}/ready
+Accept: application/json
+
+###############################################################################
+# SHIPPING SERVICE (Port 8000)
+###############################################################################
+
+### Shipping - Create a shipment
+POST {{shippingBaseUrl}}/shipments
+Content-Type: application/json
+
+{
+  "orderId": "{{$uuid}}",
+  "paymentType": "CreditCard",
+  "orderAmount": 100.00,
+  "customerId": "{{$uuid}}",
+  "houseNo": "123",
+  "street": "Main Street",
+  "city": "Sample City",
+  "state": "Sample State",
+  "postalCode": "12345",
+  "country": "Sample Country"
+}
+
+### Shipping - Health Check
+GET {{shippingBaseUrl}}/health
+Accept: application/json
+
+### Shipping - Readiness Probe
+GET {{shippingBaseUrl}}/ready
+Accept: application/json
+
+###############################################################################
+# BILLING SERVICE (Port 9000)
+###############################################################################
+
+### Billing - Make a payment
+POST {{billingBaseUrl}}/payments
+Content-Type: application/json
+
+{
+  "orderId": "{{$uuid}}",
+  "paymentType": "CreditCard",
+  "orderAmount": 100.00,
+  "customerId": "{{$uuid}}",
+  "houseNo": "123",
+  "street": "Main Street",
+  "city": "Sample City",
+  "state": "Sample State",
+  "postalCode": "12345",
+  "country": "Sample Country"
+}
+
+### Billing - Health Check
+GET {{billingBaseUrl}}/health
+Accept: application/json
+
+### Billing - Readiness Probe
+GET {{billingBaseUrl}}/ready
+Accept: application/json
+
+###############################################################################
+# UTILITY ENDPOINTS
+###############################################################################
+
+### Test All Health Endpoints
+# @name testAllHealth
+
+GET {{ordersBaseUrl}}/health
+
+###
+
+GET {{customersBaseUrl}}/health
+
+###
+
+GET {{inventoryBaseUrl}}/health
+
+###
+
+GET {{shippingBaseUrl}}/health
+
+###
+
+GET {{billingBaseUrl}}/health
+
+###############################################################################
+# Test All Readiness Endpoints
+# @name testAllReadiness
+
+GET {{ordersBaseUrl}}/ready
+
+###
+
+GET {{customersBaseUrl}}/ready
+
+###
+
+GET {{inventoryBaseUrl}}/ready
+
+###
+
+GET {{shippingBaseUrl}}/ready
+
+###
+
+GET {{billingBaseUrl}}/ready

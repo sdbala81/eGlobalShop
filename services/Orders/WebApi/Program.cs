@@ -41,6 +41,13 @@ app.MapHealthChecks(
         ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
     });
 
+app.MapHealthChecks(
+    "ready",
+    new HealthCheckOptions
+    {
+        Predicate = healthCheck => healthCheck.Tags.Contains("ready")
+    });
+
 app.UseRequestContextLogging();
 
 app.UseSerilogRequestLogging();
