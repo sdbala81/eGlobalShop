@@ -75,15 +75,7 @@ kubectl apply -f inventory/ &
 kubectl apply -f billing/ &
 kubectl apply -f shipping/ &
 
-# Wait for all background deployments to complete
-wait
 
-echo "⏳ Waiting for all application services to be ready..."
-kubectl wait --for=condition=available --timeout=180s deployment/customers-service -n eglobalshop || echo "⚠️  Customers service deployment timeout - check logs"
-kubectl wait --for=condition=available --timeout=180s deployment/orders-service -n eglobalshop || echo "⚠️  Orders service deployment timeout - check logs"
-kubectl wait --for=condition=available --timeout=180s deployment/inventory-service -n eglobalshop || echo "⚠️  Inventory service deployment timeout - check logs"
-kubectl wait --for=condition=available --timeout=180s deployment/billing-service -n eglobalshop || echo "⚠️  Billing service deployment timeout - check logs"
-kubectl wait --for=condition=available --timeout=180s deployment/shipping-service -n eglobalshop || echo "⚠️  Shipping service deployment timeout - check logs"
 
 echo "✅ All application services deployed"
 
@@ -93,32 +85,29 @@ echo ""
 
 # Step 4: Show final deployment status and service information
 echo "📊 Final Deployment Status:"
-kubectl get pods -n eglobalshop -o wide
+kubectl get all -n eglobalshop -o wide
 echo ""
 
-echo "🌐 Service Information:"
-kubectl get services -n eglobalshop
-echo ""
 
 echo "🌍 External Access URLs (via NodePort):"
 echo "   Application Services:"
-echo "   ├── Orders Service:     http://<node-ip>:5000"
-echo "   ├── Inventory Service:  http://<node-ip>:6000"
-echo "   ├── Customers Service:  http://<node-ip>:7000"
-echo "   ├── Shipping Service:   http://<node-ip>:8000"
-echo "   └── Billing Service:    http://<node-ip>:9000"
+echo "   ├── Orders Service:     http://<node-ip>:30100"
+echo "   ├── Inventory Service:  http://<node-ip>:30200"
+echo "   ├── Customers Service:  http://<node-ip>:30300"
+echo "   ├── Shipping Service:   http://<node-ip>:30400"
+echo "   └── Billing Service:    http://<node-ip>:30500"
 echo ""
 echo "   Infrastructure Services:"
-echo "   ├── PgAdmin:            http://<node-ip>:5050"
-echo "   ├── NATS Monitor:       http://<node-ip>:8222"
-echo "   └── Seq Logs:           http://<node-ip>:5341"
+echo "   ├── PgAdmin:            http://<node-ip>:30041"
+echo "   ├── NATS Monitor:       http://<node-ip>:30042"
+echo "   └── Seq Logs:           http://<node-ip>:30040"
 echo ""
 
 # Get node IP for convenience
 NODE_IP=$(kubectl get nodes -o jsonpath='{.items[0].status.addresses[?(@.type=="InternalIP")].address}' 2>/dev/null || echo "<node-ip>")
 if [ "$NODE_IP" != "<node-ip>" ]; then
     echo "💡 Your cluster node IP: $NODE_IP"
-    echo "   Example: http://$NODE_IP:5000 (Orders Service)"
+    echo "   Example: http://$NODE_IP:30100 (Orders Service)"
     echo ""
 fi
 

@@ -37,7 +37,7 @@ spec:
   ports:
     - port: 8222
       targetPort: 8222
-      nodePort: 8222
+      nodePort: 30042
       protocol: TCP
       name: monitoring
   selector:

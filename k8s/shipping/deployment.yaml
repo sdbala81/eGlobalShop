@@ -23,7 +23,8 @@ spec:
     spec:
       containers:
         - name: shipping
-          image: eglobalshop-shipping-service:latest
+          image: localhost/eglobalshop-shipping-service:latest
+          imagePullPolicy: Never
           ports:
             - containerPort: 8000
               name: http

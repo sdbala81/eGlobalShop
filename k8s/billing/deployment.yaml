@@ -23,7 +23,8 @@ spec:
     spec:
       containers:
         - name: billing
-          image: eglobalshop-billing-service:latest
+          image: localhost/eglobalshop-billing-service:latest
+          imagePullPolicy: Never
           ports:
             - containerPort: 9000
               name: http

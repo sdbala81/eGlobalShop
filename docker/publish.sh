@@ -51,11 +51,11 @@ fi
 
 # Define the services and their corresponding images
 declare -A SERVICES=(
-    ["order-service"]="eglobalshop-order-service:latest"
-    ["customer-service"]="eglobalshop-customer-service:latest"
-    ["inventory-service"]="eglobalshop-inventory-service:latest"
-    ["payment-service"]="eglobalshop-payment-service:latest"
-    ["shipping-service"]="eglobalshop-shipping-service:latest"
+    ["order-service"]="localhost/eglobalshop-order-service:latest"
+    ["customers-service"]="localhost/eglobalshop-customers-service:latest"
+    ["inventory-service"]="localhost/eglobalshop-inventory-service:latest"
+    ["billing-service"]="localhost/eglobalshop-billing-service:latest"
+    ["shipping-service"]="localhost/eglobalshop-shipping-service:latest"
 )
 
 echo ""

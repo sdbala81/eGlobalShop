@@ -23,7 +23,8 @@ spec:
     spec:
       containers:
         - name: inventory
-          image: eglobalshop-inventory-service:latest
+          image: localhost/eglobalshop-inventory-service:latest
+          imagePullPolicy: Never
           ports:
             - containerPort: 6000
               name: http

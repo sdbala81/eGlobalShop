@@ -23,7 +23,8 @@ spec:
     spec:
       containers:
         - name: customers
-          image: eglobalshop-customers-service:latest
+          image: localhost/eglobalshop-customers-service:latest
+          imagePullPolicy: Never
           ports:
             - containerPort: 7000
               name: http

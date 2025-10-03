@@ -33,7 +33,7 @@ spec:
   ports:
     - port: 5000
       targetPort: 5000
-      nodePort: 5000
+      nodePort: 30100
       protocol: TCP
       name: http
   selector:

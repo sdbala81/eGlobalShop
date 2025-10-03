@@ -404,3 +404,4 @@ FodyWeavers.xsd
 **/.vscode
 **/*.local.*
 **/*.Local.*
+**/microk8s-images
