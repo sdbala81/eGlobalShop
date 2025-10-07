@@ -1,6 +1,6 @@
 services:
   customers-service:
-    image: eglobalshop-customers-service
+    image: ${CONTAINER_REGISTRY}/eglobalshop-customers-service
     container_name: customers-service
     build:
       context: ../services
@@ -19,7 +19,7 @@ services:
       - eglobalshop-network
 
   order-service:
-    image: eglobalshop-order-service
+    image: ${CONTAINER_REGISTRY}/eglobalshop-order-service
     container_name: order-service
     build:
       context: ../services
@@ -38,7 +38,7 @@ services:
       - eglobalshop-network
 
   inventory-service:
-    image: eglobalshop-inventory-service
+    image: ${CONTAINER_REGISTRY}/eglobalshop-inventory-service
     container_name: inventory-service
     build:
       context: ../services
@@ -57,7 +57,7 @@ services:
       - eglobalshop-network
 
   billing-service:
-    image: eglobalshop-billing-service
+    image: ${CONTAINER_REGISTRY}/eglobalshop-billing-service
     container_name: billing-service
     build:
       context: ../services
@@ -76,7 +76,7 @@ services:
       - eglobalshop-network
 
   shipping-service:
-    image: eglobalshop-shipping-service
+    image: ${CONTAINER_REGISTRY}/eglobalshop-shipping-service
     container_name: shipping-service
     build:
       context: ../services

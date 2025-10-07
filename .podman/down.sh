@@ -2,10 +2,47 @@
 
 # eGlobalShop Podman Cleanup Script
 # This script stops and removes all eGlobalShop containers, networks, and volumes
+# Usage: ./down.sh [environment]
+#   environment: required parameter (local, dev, or prod)
 
 set -e
 
-echo "🧹 Cleaning up eGlobalShop resources..."
+# Get environment parameter
+ENVIRONMENT=$1
+
+# Validate environment parameter
+if [ -z "$ENVIRONMENT" ] || ([ "$ENVIRONMENT" != "local" ] && [ "$ENVIRONMENT" != "dev" ] && [ "$ENVIRONMENT" != "prod" ]); then
+    echo "❌ Error: Environment parameter is required and must be one of: local, dev, or prod"
+    echo "Usage: ./down.sh [local|dev|prod]"
+    exit 1
+fi
+
+# Load environment variables using switch statement
+case "$ENVIRONMENT" in
+    "local")
+        ENV_FILE="../.env.local"
+        ;;
+    "dev")
+        ENV_FILE="../.env.dev"
+        ;;
+    "prod")
+        ENV_FILE="../.env"
+        ;;
+    *)
+        echo "❌ Error: Invalid environment '$ENVIRONMENT'. Must be one of: local, dev, prod"
+        exit 1
+        ;;
+esac
+
+if [ -f "$ENV_FILE" ]; then
+    echo "📁 Loading environment from $ENV_FILE"
+    export $(cat "$ENV_FILE" | grep -v '^#' | xargs)
+else
+    echo "❌ Error: Environment file $ENV_FILE not found"
+    exit 1
+fi
+
+echo "🧹 Cleaning up eGlobalShop resources (Environment: $ENVIRONMENT)..."
 
 # Navigate to the directory containing this script
 cd "$(dirname "$0")"
@@ -57,4 +94,6 @@ podman volume ls --format "table {{.Name}}\t{{.Driver}}"
 
 echo ""
 echo "🚀 To redeploy eGlobalShop, run:"
-echo "   ./start.sh"
+echo "   ./start.sh local    # For local development"
+echo "   ./start.sh dev      # For development environment"
+echo "   ./start.sh prod     # For production"
