@@ -21,13 +21,13 @@ fi
 # Load environment variables using switch statement
 case "$ENVIRONMENT" in
     "local")
-        ENV_FILE="../.env.local"
+        ENV_FILE="../../.env.local"
         ;;
     "dev")
-        ENV_FILE="../.env.dev"
+        ENV_FILE="../../.env.dev"
         ;;
     "prod")
-        ENV_FILE="../.env"
+        ENV_FILE="../../.env"
         ;;
     *)
         echo "❌ Error: Invalid environment '$ENVIRONMENT'. Must be one of: local, dev, prod"
@@ -45,21 +45,19 @@ fi
 
 echo "🚀 Deploying eGlobalShop with Podman (Environment: $ENVIRONMENT)..."
 
-# Navigate to the directory containing this script
-cd "$(dirname "$0")"
+# Navigate to the .podman directory for compose files
+cd "$(dirname "$0")/../../.podman"
 
 # Build services first
 echo "🔨 Building services..."
-./build.sh "$ENVIRONMENT"
+"$(dirname "$0")/build.sh" "$ENVIRONMENT"
 
 echo ""
 echo "🚀 Starting services..."
 
 # Start all services
-echo "Starting infrastructure services first..."
-podman-compose -f compose.yaml -f podman-compose-infra.yaml up -d
-echo "Starting application services..."
-podman-compose -f compose.yaml -f podman-compose-app.yaml up -d
+echo "Starting all services..."
+podman-compose -f compose.yaml -f podman-compose-infra.yaml -f podman-compose-app.yaml up -d
 
 echo ""
 echo "🎉 All services deployed successfully!"
@@ -95,15 +93,15 @@ echo "   podman-compose -f compose.yaml -f podman-compose-app.yaml logs -f"
 
 echo ""
 echo "🛑 To stop all services, run:"
-echo "   ./down.sh $ENVIRONMENT"
+echo "   ./.scripts/bash/down.sh $ENVIRONMENT"
 echo ""
 echo "📋 Usage examples:"
-echo "   ./start.sh local               # Deploy all services locally"
-echo "   ./start.sh dev                 # Deploy all services for development"
-echo "   ./start.sh prod                # Deploy all services for production"
-echo "   ./build.sh local               # Build all services only (local)"
-echo "   ./build.sh dev                 # Build all services only (development)"
-echo "   ./build.sh prod                # Build all services only (production)"
-echo "   ./down.sh local                # Stop and cleanup (local)"
-echo "   ./down.sh dev                  # Stop and cleanup (development)"
-echo "   ./down.sh prod                 # Stop and cleanup (production)"
+echo "   ./.scripts/bash/start.sh local         # Deploy all services locally"
+echo "   ./.scripts/bash/start.sh dev           # Deploy all services for development"
+echo "   ./.scripts/bash/start.sh prod          # Deploy all services for production"
+echo "   ./.scripts/bash/build.sh local         # Build all services only (local)"
+echo "   ./.scripts/bash/build.sh dev           # Build all services only (development)"
+echo "   ./.scripts/bash/build.sh prod          # Build all services only (production)"
+echo "   ./.scripts/bash/down.sh local          # Stop and cleanup (local)"
+echo "   ./.scripts/bash/down.sh dev            # Stop and cleanup (development)"
+echo "   ./.scripts/bash/down.sh prod           # Stop and cleanup (production)"

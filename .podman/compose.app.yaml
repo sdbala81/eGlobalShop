@@ -1,7 +1,7 @@
 services:
-  customers-service:
-    image: ${CONTAINER_REGISTRY}/eglobalshop-customers-service
-    container_name: customers-service
+  customer-service:
+    image: ${CONTAINER_REGISTRY}/eglobalshop-customer-service
+    container_name: customer-service
     build:
       context: ../services
       dockerfile: Customers/Dockerfile

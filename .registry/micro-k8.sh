@@ -49,7 +49,7 @@ import_image() {
     echo "🔍 Checking if $local_image exists locally..."
     if ! podman image exists "$local_image"; then
         echo "❌ Error: Image $local_image not found locally!"
-        echo "💡 Build the images first with: cd ../podman && ./build.sh"
+        echo "💡 Build the images first with: cd ../.scripts/bash && ./build.sh"
         return 1
     fi
     
@@ -96,7 +96,7 @@ if [ ${#missing_images[@]} -ne 0 ]; then
     done
     echo ""
     echo "💡 To build all images, run:"
-    echo "   cd ../podman && ./build.sh"
+    echo "   cd ../.scripts/bash && ./build.sh"
     echo ""
     echo "⚠️  Or to build images without starting containers:"
     echo "   cd ../podman && podman-compose build"

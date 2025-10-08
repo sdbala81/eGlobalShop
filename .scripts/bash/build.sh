@@ -21,13 +21,13 @@ fi
 # Load environment variables using switch statement
 case "$ENVIRONMENT" in
     "local")
-        ENV_FILE="../.env.local"
+        ENV_FILE="../../.env.local"
         ;;
     "dev")
-        ENV_FILE="../.env.dev"
+        ENV_FILE="../../.env.dev"
         ;;
     "prod")
-        ENV_FILE="../.env"
+        ENV_FILE="../../.env"
         ;;
     *)
         echo "❌ Error: Invalid environment '$ENVIRONMENT'. Must be one of: local, dev, prod"
@@ -45,8 +45,8 @@ fi
 
 echo "🔨 Building eGlobalShop services (Environment: $ENVIRONMENT)..."
 
-# Navigate to the directory containing this script
-cd "$(dirname "$0")"
+# Navigate to the .podman directory for compose files
+cd "$(dirname "$0")/../../.podman"
 
 # Build all services
 echo "🔨 Building all services..."

@@ -20,13 +20,13 @@ fi
 # Load environment variables using switch statement
 case "$ENVIRONMENT" in
     "local")
-        ENV_FILE="../.env.local"
+        ENV_FILE="../../.env.local"
         ;;
     "dev")
-        ENV_FILE="../.env.dev"
+        ENV_FILE="../../.env.dev"
         ;;
     "prod")
-        ENV_FILE="../.env"
+        ENV_FILE="../../.env"
         ;;
     *)
         echo "❌ Error: Invalid environment '$ENVIRONMENT'. Must be one of: local, dev, prod"
@@ -44,8 +44,8 @@ fi
 
 echo "🧹 Cleaning up eGlobalShop resources (Environment: $ENVIRONMENT)..."
 
-# Navigate to the directory containing this script
-cd "$(dirname "$0")"
+# Navigate to the .podman directory for compose files
+cd "$(dirname "$0")/../../.podman"
 
 # Stop all services first
 echo "🛑 Stopping all services..."
@@ -94,6 +94,6 @@ podman volume ls --format "table {{.Name}}\t{{.Driver}}"
 
 echo ""
 echo "🚀 To redeploy eGlobalShop, run:"
-echo "   ./start.sh local    # For local development"
-echo "   ./start.sh dev      # For development environment"
-echo "   ./start.sh prod     # For production"
+echo "   ./.scripts/bash/start.sh local    # For local development"
+echo "   ./.scripts/bash/start.sh dev      # For development environment"
+echo "   ./.scripts/bash/start.sh prod     # For production"
